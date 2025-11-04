@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 
+
 class DoubleConv(nn.Module):
     def __init__(self, in_channels, out_channels):
         super(DoubleConv, self).__init__()
@@ -60,6 +61,7 @@ class UNet(nn.Module):
         b = self.bottleneck(p4)
 
         d4 = self.up4(b)
+        # concatenate 2 tensors along channel axis & skip connection
         d4 = torch.cat([d4, s4], dim=1)
         d4 = self.dec4(d4)
 
